@@ -21,8 +21,53 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const matr = matrix || [];
+  for (let i = 0; i < matr.length; i++) {
+    for (let j = 0; j < matr[i].length; j++) {
+      if (matr[i][j] === false) {
+        matr[i][j] = 0;
+      }
+    }
+  }
+  for (let i = 0; i < matr.length; i++) {
+    for (let j = 0; j < matr[i].length; j++) {
+      if (matr[i][j] === true) {
+        if (i > 0 && j > 0 && matr[i - 1][j - 1] !== true) {
+          matr[i - 1][j - 1] = matr[i - 1][j - 1] + 1;
+        }
+        if (i > 0 && matr[i - 1][j] !== true) {
+          matr[i - 1][j] = matr[i - 1][j] + 1;
+        }
+        if (i > 0 && j < matr[i].length - 1 && matr[i - 1][j + 1] !== true) {
+          matr[i - 1][j + 1] = matr[i - 1][j + 1] + 1;
+        }
+        if (j > 0 && matr[i][j - 1] !== true) {
+          matr[i][j - 1] = matr[i][j - 1] + 1;
+        }
+        if (j < matr[i].length - 1 && matr[i][j + 1] !== true) {
+          matr[i][j + 1] = matr[i][j + 1] + 1;
+        }
+        if (i < matr.length - 1 && j > 0 && matr[i + 1][j - 1] !== true) {
+          matr[i + 1][j - 1] = matr[i + 1][j - 1] + 1;
+        }
+        if (i < matr.length - 1 && matr[i + 1][j] !== true) {
+          matr[i + 1][j] = matr[i + 1][j] + 1;
+        }
+        if (i < matr.length - 1 && j < matr[i].length - 1 && matr[i + 1][j + 1] !== true) {
+          matr[i + 1][j + 1] = matr[i + 1][j + 1] + 1;
+        }
+      }
+    }
+  }
+  for (let i = 0; i < matr.length; i++) {
+    for (let j = 0; j < matr[i].length; j++) {
+      if (matr[i][j] === true) {
+        matr[i][j] = 1;
+      }
+    }
+  }
+  return matr;
 }
 
 module.exports = minesweeper;
