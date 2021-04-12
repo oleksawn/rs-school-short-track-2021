@@ -11,11 +11,15 @@
  */
 function getCommonCharacterCount(s1, s2) {
   let res = 0;
-  const str1 = s1.split('');
-  for (let i = 0; i < str1.length; i++) {
-    if (s2.includes(str1[i])) {
-      res++;
-      s2 = s2.replace(str1[i], '');
+  const arr1 = s1.split('').sort();
+  const arr2 = s2.split('').sort();
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr2[j] === arr1[i]) {
+        res++;
+        arr2.splice(j, 1);
+        j = arr2.length - 1;
+      }
     }
   }
   return res;
